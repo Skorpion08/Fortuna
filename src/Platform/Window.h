@@ -1,0 +1,33 @@
+#pragma once
+
+#include <string>
+
+struct GLFWwindow;
+
+class Window
+{
+public:
+	Window(int _width, int _height, const std::string& _title);
+
+	virtual ~Window();
+
+	void PollEvents();
+
+	void Present();
+
+	bool ShouldClose() const;
+
+	int GetWidth() const { return width; }
+	int GetHeight() const { return height; }
+
+	const std::string& GetTitle() const { return title; }
+
+private:
+
+	int width, height;
+	std::string title;
+
+	GLFWwindow* window;
+
+	bool _initialized = false;
+};
