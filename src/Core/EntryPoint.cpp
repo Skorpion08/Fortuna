@@ -25,8 +25,6 @@ int main()
 		exitCode = 1;
 	}
 
-	Log::Critical("SHEX");
-
 	Log::Shutdown();
 	return exitCode;
 }
