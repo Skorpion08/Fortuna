@@ -1,5 +1,7 @@
 #include "Window.h"
 
+
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
 #include "../Core/Log.h"
@@ -44,6 +46,15 @@ Window::Window(int _width, int _height, const std::string& _title)
 	glfwMakeContextCurrent(window);
 
 	glfwSwapInterval(1);
+
+	Log::Info("Loading OpenGL...");
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		Log::Critical("Failed to initialize OpenGL context with GLAD");
+		throw std::runtime_error("Failed to initialize OpenGL context");
+	}
+
+	Log::Info("OpenGL {} loaded", (const char*)glGetString(GL_VERSION));
 
 	Log::Info("Window '{}' created", GetTitle());
 }
