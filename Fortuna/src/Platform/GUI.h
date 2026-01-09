@@ -1,0 +1,19 @@
+#pragma once
+
+class Window;
+
+namespace Gui
+{
+bool IsInitialized();
+
+void Init(Window* window);
+
+void Shutdown();
+
+void StartFrame();
+
+void Render();
+
+enum class MenuAction { None, Play, Editor };
+MenuAction ShowMainMenu();
+}
