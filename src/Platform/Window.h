@@ -20,7 +20,12 @@ public:
 	int GetWidth() const { return width; }
 	int GetHeight() const { return height; }
 
+	void SetWindowSize(int _width, int _height);
+
 	const std::string& GetTitle() const { return title; }
+
+	GLFWwindow* GetImpl() { return window; }
+	const GLFWwindow* GetImpl() const { return window; }
 
 private:
 

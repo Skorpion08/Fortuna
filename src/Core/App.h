@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "Renderer/Backend.h"
+
 class Window;
 
 class App
@@ -9,13 +11,14 @@ class App
 public:
 	App();
 
-	virtual ~App();
+	~App();
 
 	void Run();
 
 protected:
 
 	std::unique_ptr<Window> window;
+	std::unique_ptr<Renderer<ChosenBackend>> renderer;
 
 	bool running = false;
 };

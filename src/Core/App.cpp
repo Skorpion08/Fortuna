@@ -1,6 +1,7 @@
 #include "App.h"
 
-#include "../Platform/Window.h"
+#include "Platform/Window.h"
+#include "Platform/GUI.h"
 
 #include "Log.h"
 
@@ -8,7 +9,11 @@ App::App()
 {
 	Log::Info("Initalizing application...");
 
-	window = std::make_unique<Window>(400, 600, "Fortuna");
+	window = std::make_unique<Window>(1200, 900, "Fortuna");
+
+	Gui::Init(window.get());
+
+	renderer = std::make_unique<Renderer<ChosenBackend>>();
 
 	Log::Info("Application initialized");
 }
@@ -16,6 +21,8 @@ App::App()
 App::~App()
 {
 	Log::Info("Shutting down application...");
+
+	Gui::Shutdown();
 
 	if (window)
 		window.reset();
@@ -31,6 +38,14 @@ void App::Run()
 	while (!window->ShouldClose())
 	{
 		window->PollEvents();
+
+		renderer->StartFrame();
+		Gui::StartFrame();
+
+		// logic
+		
+		renderer->Render();
+		Gui::Render();
 
 		window->Present();
 	}

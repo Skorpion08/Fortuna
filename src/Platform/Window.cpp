@@ -11,6 +11,11 @@ static void GLFWErrorCallback(int error, const char* description)
 	Log::Error("GLFW Error {}: {}", error, description);
 }
 
+static void GLFWFramebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	static_cast<Window*>(glfwGetWindowUserPointer(window))->SetWindowSize(width, height);
+}
+
 Window::Window(int _width, int _height, const std::string& _title)
 	: width(_width), height(_height), title(_title)
 {
@@ -47,6 +52,8 @@ Window::Window(int _width, int _height, const std::string& _title)
 
 	glfwSwapInterval(1);
 
+	glfwSetWindowUserPointer(window, this);
+
 	Log::Info("Loading OpenGL...");
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -55,6 +62,10 @@ Window::Window(int _width, int _height, const std::string& _title)
 	}
 
 	Log::Info("OpenGL {} loaded", (const char*)glGetString(GL_VERSION));
+
+	glfwSetFramebufferSizeCallback(window, GLFWFramebufferSizeCallback);
+
+	SetWindowSize(width, height);
 
 	Log::Info("Window '{}' created", GetTitle());
 }
@@ -113,4 +124,12 @@ bool Window::ShouldClose() const
 		Log::Warn("glfw window '{}' is null in Window::ShouldClose(), treating as closed", title);
 		return true;
 	}
+}
+
+void Window::SetWindowSize(int _width, int _height)
+{
+	width = _width;
+	height = _height;
+
+	glViewport(0, 0, width, height);
 }
