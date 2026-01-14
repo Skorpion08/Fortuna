@@ -1,5 +1,7 @@
 #include "GUI.h"
 
+#include "GLFW/glfw3.h"
+
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
@@ -80,27 +82,6 @@ void Render()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-}
-
-MenuAction ShowMainMenu()
-{
-	MenuAction result = MenuAction::None;
-
-	if (ImGui::Begin("Menu", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground))
-	{
-		if (ImGui::Button("Gra", { 100, 30 }))
-		{
-			result = MenuAction::Play;
-		}
-		if(ImGui::Button("Edytor", { 100, 30 }))
-		{
-			result = MenuAction::Editor;
-		}
-
-		ImGui::End();
-	}
-
-	return result;
 }
 
 }

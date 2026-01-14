@@ -35,6 +35,8 @@ void App::Run()
 	running = true;
 	Log::Info("Application running...");
 
+	sceneManager.TransitionTo(SceneType::MainMenu);
+
 	while (!window->ShouldClose())
 	{
 		window->PollEvents();
@@ -43,9 +45,8 @@ void App::Run()
 		Gui::StartFrame();
 
 		// logic
+		sceneManager.Update();
 
-		scene.Update();
-		
 		renderer->Render();
 		Gui::Render();
 

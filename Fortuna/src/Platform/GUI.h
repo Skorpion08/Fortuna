@@ -13,7 +13,4 @@ void Shutdown();
 void StartFrame();
 
 void Render();
-
-enum class MenuAction { None, Play, Editor };
-MenuAction ShowMainMenu();
 }

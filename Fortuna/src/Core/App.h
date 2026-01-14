@@ -4,7 +4,7 @@
 
 #include "Renderer/Backend.h"
 
-#include "Scene.h"
+#include "SceneManager.h"
 
 class Window;
 
@@ -22,7 +22,7 @@ protected:
 	std::unique_ptr<Window> window;
 	std::unique_ptr<Renderer<ChosenBackend>> renderer;
 
-	Scene scene;
+	SceneManager sceneManager;
 
 	bool running = false;
 };
