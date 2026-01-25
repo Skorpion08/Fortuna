@@ -40,6 +40,24 @@ void Init(Window* window)
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
 
+	// Font configuration
+	ImFontConfig cfg;
+	cfg.FontDataOwnedByAtlas = false;
+
+	static const ImWchar ranges[] =
+	{
+		0x0020, 0x00FF, // Basic Latin + Latin Supplement
+		0x0100, 0x017F, // Latin Extended-A
+		0,
+	};
+
+	io.Fonts->AddFontFromFileTTF(
+		"Fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf",
+		18.0f,
+		&cfg,
+		&ranges[0]
+	);
+
 	// Setup Platform/Renderer backends
 	Log::Info("Initializing DearImGui backends...");
 

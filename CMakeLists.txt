@@ -23,3 +23,10 @@ add_subdirectory ("Dependencies/glm")
 add_subdirectory ("Dependencies/fmt")
 
 add_subdirectory ("Dependencies/imgui")
+
+add_custom_target(copy_fonts ALL
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/Fortuna/Fonts"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/Fortuna/Fonts
+        ${CMAKE_BINARY_DIR}/Fortuna/Fonts
+)

@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (Fortuna "src/Core/App.h" "src/Core/App.cpp" "src/Core/Log.h" "src/Core/EntryPoint.cpp" "src/Platform/Window.h" "src/Platform/Window.cpp" "src/Platform/GUI.h" "src/Platform/GUI.cpp" "src/Renderer/Renderer.h" "src/Renderer/Renderer.cpp" "src/Renderer/OpenGL/RendererOpenGL.h" "src/Renderer/OpenGL/RendererOpenGL.cpp" "src/Renderer/Backend.h" "src/Core/SceneManager.h" "src/Core/SceneManager.cpp" "src/Core/Scenes/Scene.h" "src/Core/Scenes/MainMenuScene.h" "src/Core/Scenes/MainMenuScene.cpp" "src/Core/Scenes/GameScene.h" "src/Core/Scenes/GameScene.cpp" "src/Core/Scenes/EditorScene.h" "src/Core/Scenes/EditorScene.cpp" "src/Game/Question.h" "src/Game/Phase.h")
+add_executable (Fortuna "src/Core/App.h" "src/Core/App.cpp" "src/Core/Log.h" "src/Core/EntryPoint.cpp" "src/Platform/Window.h" "src/Platform/Window.cpp" "src/Platform/GUI.h" "src/Platform/GUI.cpp" "src/Renderer/Renderer.h" "src/Renderer/Renderer.cpp" "src/Renderer/OpenGL/RendererOpenGL.h" "src/Renderer/OpenGL/RendererOpenGL.cpp" "src/Renderer/Backend.h" "src/Core/SceneManager.h" "src/Core/SceneManager.cpp" "src/Core/Scenes/Scene.h" "src/Core/Scenes/MainMenuScene.h" "src/Core/Scenes/MainMenuScene.cpp" "src/Core/Scenes/GameScene.h" "src/Core/Scenes/GameScene.cpp" "src/Core/Scenes/EditorScene.h" "src/Core/Scenes/EditorScene.cpp" "src/Game/Question.h" "src/Game/Phase.h"  "src/Game/Wheel.h" "src/Game/Wheel.cpp" "src/Game/Slot.h" "src/Game/Slot.cpp"  "src/Game/Player.h" "src/Game/SpinResult.h")
 
 target_include_directories(Fortuna PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(Fortuna PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Dependencies/nlohmann)
@@ -14,6 +14,10 @@ set_property(TARGET Fortuna PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET Fortuna PROPERTY CXX_EXTENSIONS OFF)
 
 # TODO: Add tests and install targets if needed.
+# MSVC UTF-8 flag
+if(MSVC)
+    target_compile_options(Fortuna PRIVATE /utf-8)
+endif()
 
 target_link_libraries(Fortuna PRIVATE glfw glad fmt::fmt glm::glm imgui)
 
