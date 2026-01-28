@@ -3,10 +3,10 @@
 #
 
 # Add source to this project's executable.
-add_executable (Fortuna "src/Core/App.h" "src/Core/App.cpp" "src/Core/Log.h" "src/Core/EntryPoint.cpp" "src/Platform/Window.h" "src/Platform/Window.cpp" "src/Platform/GUI.h" "src/Platform/GUI.cpp" "src/Renderer/Renderer.h" "src/Renderer/Renderer.cpp" "src/Renderer/OpenGL/RendererOpenGL.h" "src/Renderer/OpenGL/RendererOpenGL.cpp" "src/Renderer/Backend.h" "src/Core/SceneManager.h" "src/Core/SceneManager.cpp" "src/Core/Scenes/Scene.h" "src/Core/Scenes/MainMenuScene.h" "src/Core/Scenes/MainMenuScene.cpp" "src/Core/Scenes/GameScene.h" "src/Core/Scenes/GameScene.cpp" "src/Core/Scenes/EditorScene.h" "src/Core/Scenes/EditorScene.cpp" "src/Game/Question.h" "src/Game/Phase.h"  "src/Game/Wheel.h" "src/Game/Wheel.cpp" "src/Game/Slot.h" "src/Game/Slot.cpp"  "src/Game/Player.h" "src/Game/SpinResult.h")
+add_executable (Fortuna "src/Core/App.h" "src/Core/App.cpp" "src/Core/Log.h" "src/Core/EntryPoint.cpp" "src/Platform/Window.h" "src/Platform/Window.cpp" "src/Platform/GUI.h" "src/Platform/GUI.cpp" "src/Renderer/Renderer.h" "src/Renderer/Renderer.cpp" "src/Renderer/OpenGL/RendererOpenGL.h" "src/Renderer/OpenGL/RendererOpenGL.cpp"  "src/Core/SceneManager.h" "src/Core/SceneManager.cpp" "src/Core/Scenes/Scene.h" "src/Core/Scenes/MainMenuScene.h" "src/Core/Scenes/MainMenuScene.cpp" "src/Core/Scenes/GameScene.h" "src/Core/Scenes/GameScene.cpp" "src/Core/Scenes/EditorScene.h" "src/Core/Scenes/EditorScene.cpp" "src/Game/Question.h" "src/Game/Phase.h"  "src/Game/Wheel.h" "src/Game/Wheel.cpp" "src/Game/Slot.h" "src/Game/Slot.cpp"  "src/Game/Player.h" "src/Game/SpinResult.h" "src/Renderer/OpenGL/ShaderProgram.h" "src/Renderer/OpenGL/ShaderProgram.cpp")
 
 target_include_directories(Fortuna PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_include_directories(Fortuna PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Dependencies/nlohmann)
+target_include_directories(Fortuna PRIVATE ${CMAKE_SOURCE_DIR}/Dependencies/nlohmann)
 
 # Set C++20
 set_property(TARGET Fortuna PROPERTY CXX_STANDARD 20)
@@ -19,7 +19,9 @@ if(MSVC)
     target_compile_options(Fortuna PRIVATE /utf-8)
 endif()
 
-target_link_libraries(Fortuna PRIVATE glfw glad fmt::fmt glm::glm imgui)
+target_link_libraries(Fortuna PRIVATE glfw glad fmt::fmt glm::glm imgui 
+#Freetype::Freetype
+)
 
 # Set compile definitions depending on build type
 target_compile_definitions(Fortuna PRIVATE BACKEND_OPENGL)

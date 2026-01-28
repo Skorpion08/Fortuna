@@ -2,10 +2,9 @@
 
 #include <memory>
 
-#include "Renderer/Backend.h"
-
 #include "SceneManager.h"
 
+class Renderer;
 class Window;
 
 class App
@@ -20,7 +19,7 @@ public:
 protected:
 
 	std::unique_ptr<Window> window;
-	std::unique_ptr<Renderer<ChosenBackend>> renderer;
+	std::unique_ptr<Renderer> renderer;
 
 	SceneManager sceneManager;
 

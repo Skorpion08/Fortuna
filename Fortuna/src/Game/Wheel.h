@@ -8,16 +8,23 @@
 #include "SpinResult.h"
 #include "Slot.h"
 
+class Renderer;
+
 class Wheel
 {
 public:
 	Wheel();
+
+	void Render(Renderer* renderer);
 
 	void AddSlot(std::unique_ptr<Slot>&& newSlot);
 
 	Slot* Spin();
 private:
 	std::vector<std::unique_ptr<Slot>> slots;
+	std::vector<glm::vec4> colors;
 
 	std::mt19937 engine{ std::random_device{}() };
+
+	float rotation=0.0f;
 };

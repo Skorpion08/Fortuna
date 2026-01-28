@@ -1,5 +1,7 @@
 #pragma once
 
+class Renderer;
+
 enum class SceneType
 {
 	None,
@@ -15,6 +17,7 @@ public:
 	virtual ~Scene() {}
 
 	virtual void Update() = 0;
+	virtual void Render(Renderer* renderer) {}
 
 	SceneType GetType() const { return type; }
 

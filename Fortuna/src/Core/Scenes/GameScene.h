@@ -57,11 +57,14 @@ inline constexpr bool IsPreguessed(char32_t c)
 	return false;
 }
 
+class Renderer;
+
 class GameScene : public Scene
 {
 public:
 	GameScene();
 
+	virtual void Render(Renderer* renderer) override;
 	virtual void Update() override;
 
 	const Question& GetQuestion() const { return questions[questionIndex]; }

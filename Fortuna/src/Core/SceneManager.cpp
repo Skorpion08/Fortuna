@@ -16,6 +16,11 @@ void SceneManager::Update()
 		TransitionTo(sceneData->GetNextScene());
 }
 
+void SceneManager::Render(Renderer* renderer)
+{
+	sceneData->Render(renderer);
+}
+
 void SceneManager::TransitionTo(SceneType next)
 {
 	if (next == currentScene)

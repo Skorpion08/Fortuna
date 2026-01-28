@@ -5,9 +5,13 @@
 #include "Player.h"
 #include "SpinResult.h"
 
+#include <glm/vec4.hpp>
+
 class Slot
 {
 public:
+	Slot(glm::vec4 _color) : color(_color) {}
+
 	virtual ~Slot() = default;
 
 	virtual SpinResult Use(Player& player) = 0;
@@ -16,12 +20,17 @@ public:
 
 	// Whether the player can guess after getting this
 	virtual bool CanGuess() const = 0;
+
+	glm::vec4 GetColor() const { return color; }
+
+private:
+	glm::vec4 color;
 };
 
 class PointSlot : public Slot
 {
 public:
-	PointSlot(int _points) : points(_points), title(std::to_string(_points))
+	PointSlot(int _points, glm::vec4 _color) : Slot(_color), points(_points), title(std::to_string(_points))
 	{
 	}
 
@@ -46,7 +55,7 @@ private:
 class BankruptSlot : public Slot
 {
 public:
-	BankruptSlot() : title("Bankrupt")
+	BankruptSlot() : Slot(glm::vec4(0.25f, 0.25f, 0.25f, 1.0f)), title("Bankrupt")
 	{
 	}
 
@@ -74,7 +83,7 @@ private:
 class StopSlot : public Slot
 {
 public:
-	StopSlot() : title("Stop")
+	StopSlot() : Slot(glm::vec4(0.45f, 0.7f, 0.8f, 1.0f)), title("Stop")
 	{
 	}
 

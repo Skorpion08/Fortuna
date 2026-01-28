@@ -35,4 +35,6 @@ private:
 	GLFWwindow* window;
 
 	bool _initialized = false;
+
+
 };

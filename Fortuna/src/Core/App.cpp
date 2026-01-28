@@ -5,6 +5,12 @@
 
 #include "Log.h"
 
+#if defined(BACKEND_OPENGL)
+#include "Renderer/OpenGL/RendererOpenGL.h"
+#else
+#error "No render backend selected"
+#endif
+
 App::App()
 {
 	Log::Info("Initalizing application...");
@@ -13,7 +19,7 @@ App::App()
 
 	Gui::Init(window.get());
 
-	renderer = std::make_unique<Renderer<ChosenBackend>>();
+	renderer = std::make_unique<RendererOpenGL>(1200.0f, 900.0f);
 
 	Log::Info("Application initialized");
 }
@@ -44,9 +50,12 @@ void App::Run()
 		renderer->StartFrame();
 		Gui::StartFrame();
 
+		renderer->Resize(static_cast<float>(window->GetWidth()), static_cast<float>(window->GetHeight()));
+
 		// logic
 		sceneManager.Update();
-
+		
+		sceneManager.Render(renderer.get());
 		renderer->Render();
 		Gui::Render();
 

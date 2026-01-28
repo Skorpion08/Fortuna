@@ -2,31 +2,24 @@
 
 #include <concepts>
 
-template <typename T>
-concept RendererBackend =
-    requires(T t)
-{
-    { t.Init() } -> std::same_as<void>;
-    { t.Shutdown() } -> std::same_as<void>;
-    { t.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f) } -> std::same_as<void>;
-    { t.StartFrame() } -> std::same_as<void>;
-    { t.Render() } -> std::same_as<void>;
-};
+#include <glm/vec2.hpp>
+#include <glm/vec4.hpp>
+#include <vector>
 
-template <RendererBackend Backend>
 class Renderer
 {
 public:
-    Renderer() { backend.Init(); }
+    Renderer() {}
 
-    ~Renderer() { backend.Shutdown(); }
+    virtual ~Renderer() {}
 
-    void SetClearColor(float r, float g, float b, float a) { backend.SetClearColor(r, g, b, a); }
+    virtual void SetClearColor(float r, float g, float b, float a) = 0;
 
-    void StartFrame() { backend.StartFrame(); }
+    virtual void StartFrame() = 0;
 
-    void Render() { backend.Render(); }
-    
-private:
-    Backend backend;
+    virtual void RenderWheel(int segmentCount, glm::vec2 center, float radius, float offsetAngle, const std::vector<glm::vec4>& colors) = 0;
+
+    virtual void Resize(float width, float height) = 0;
+
+    virtual void Render() = 0;
 };

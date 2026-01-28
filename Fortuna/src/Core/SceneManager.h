@@ -4,10 +4,13 @@
 
 #include "Scenes/Scene.h"
 
+class Renderer;
+
 class SceneManager
 {
 public:
 	void Update();
+	void Render(Renderer* renderer);
 	void TransitionTo(SceneType next);
 private:
 

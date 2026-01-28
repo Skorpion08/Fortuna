@@ -83,6 +83,11 @@ GameScene::GameScene()
 	Log::Info("Transitioned to game scene");
 }
 
+void GameScene::Render(Renderer* renderer)
+{
+	wheel.Render(renderer);
+}
+
 void GameScene::Update()
 {
 	if (!open)
