@@ -7,5 +7,5 @@ class MainMenuScene : public Scene
 public:
 	MainMenuScene();
 
-	virtual void Update() override;
+	virtual void Update(float deltaTime) override;
 };

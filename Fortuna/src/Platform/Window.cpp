@@ -133,3 +133,8 @@ void Window::SetWindowSize(int _width, int _height)
 
 	glViewport(0, 0, width, height);
 }
+
+float Window::GetTime() const
+{
+	return glfwGetTime();
+}

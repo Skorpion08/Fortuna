@@ -65,7 +65,7 @@ public:
 	GameScene();
 
 	virtual void Render(Renderer* renderer) override;
-	virtual void Update() override;
+	virtual void Update(float deltaTime) override;
 
 	const Question& GetQuestion() const { return questions[questionIndex]; }
 
@@ -74,6 +74,7 @@ private:
 
 	void UpdateStart();
 	void UpdateWheel();
+	void UpdateSpinningWheel(float deltaTime);
 	void UpdateShowWheel();
 	void UpdateGuessing();
 	void UpdateShowGuessed();

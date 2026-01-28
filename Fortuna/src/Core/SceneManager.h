@@ -9,7 +9,7 @@ class Renderer;
 class SceneManager
 {
 public:
-	void Update();
+	void Update(float deltaTime);
 	void Render(Renderer* renderer);
 	void TransitionTo(SceneType next);
 private:

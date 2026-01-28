@@ -8,8 +8,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-constexpr float  PI_f = std::numbers::pi_v<float>;
-constexpr double PI = std::numbers::pi;
+constexpr float PI = std::numbers::pi_v<float>;
 
 RendererOpenGL::RendererOpenGL(float width, float height)
 {
@@ -67,7 +66,7 @@ void RendererOpenGL::RenderWheel(int segmentCount, glm::vec2 center, float radiu
 {
 	assert(segmentCount == colors.size());
 
-	float angleDiff = 2.0f * PI_f / static_cast<float>(segmentCount);
+	float angleDiff = 2.0f * PI / static_cast<float>(segmentCount);
 
 	std::vector<Vertex> vertices;
 	vertices.reserve(segmentCount * 3);

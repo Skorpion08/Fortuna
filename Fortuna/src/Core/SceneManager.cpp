@@ -8,9 +8,9 @@
 
 #include "Core/Log.h"
 
-void SceneManager::Update()
+void SceneManager::Update(float deltaTime)
 {
-	sceneData->Update();
+	sceneData->Update(deltaTime);
 
 	if (sceneData->WantsToTransition())
 		TransitionTo(sceneData->GetNextScene());

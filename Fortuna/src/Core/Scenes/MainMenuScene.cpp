@@ -11,7 +11,7 @@ MainMenuScene::MainMenuScene()
 
 }
 
-void MainMenuScene::Update()
+void MainMenuScene::Update(float deltaTime)
 {
 	if (ImGui::Begin("Menu", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground))
 	{

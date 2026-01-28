@@ -78,7 +78,7 @@ EditorScene::~EditorScene()
 {
 }
 
-void EditorScene::Update()
+void EditorScene::Update(float deltaTime)
 {
 	bool open = true;
 	if (ImGui::Begin("Edytor", &open, ImGuiWindowFlags_MenuBar | (unsaved ? ImGuiWindowFlags_UnsavedDocument : 0)))

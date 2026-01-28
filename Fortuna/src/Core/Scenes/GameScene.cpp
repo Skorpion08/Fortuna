@@ -88,7 +88,7 @@ void GameScene::Render(Renderer* renderer)
 	wheel.Render(renderer);
 }
 
-void GameScene::Update()
+void GameScene::Update(float deltaTime)
 {
 	if (!open)
 	{
@@ -105,6 +105,9 @@ void GameScene::Update()
 		break;
 	case Phase::Wheel:
 		UpdateWheel();
+		break;
+	case Phase::SpinningWheel:
+		UpdateSpinningWheel(deltaTime);
 		break;
 	case Phase::ShowWheel:
 		UpdateShowWheel();
@@ -242,11 +245,31 @@ void GameScene::UpdateWheel()
 
 		if (ImGui::Button("Spin"))
 		{
-			slotThisTurn = wheel.Spin();
-			currentPhase = Phase::ShowWheel;
+			wheel.StartSpin();
+			currentPhase = Phase::SpinningWheel;
 		}
 	}
 	ImGui::End();
+}
+
+void GameScene::UpdateSpinningWheel(float deltaTime)
+{
+	ShowLeaderboard();
+	ShowSentence();
+
+	if (ImGui::Begin("Controls", &open))
+	{
+		ImGui::Text("Current player: %s", players[currentPlayer].nickname.c_str());
+
+		ImGui::Text("Spinning...");
+	}
+	ImGui::End();
+
+	if (!wheel.Spinning(deltaTime))
+	{
+		slotThisTurn = wheel.EndSpin();
+		currentPhase = Phase::ShowWheel;
+	}
 }
 
 void GameScene::UpdateShowWheel()
@@ -407,6 +430,7 @@ void GameScene::UpdateShowGuessed()
 		{
 			currentPlayer = nextPlayer;
 
+			wheel.ResetSpin();
 			currentPhase = Phase::Wheel;
 			Log::Info("Set to next player's turn: {}", players[currentPlayer].nickname);
 		}

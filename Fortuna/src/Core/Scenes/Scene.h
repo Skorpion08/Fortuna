@@ -16,7 +16,7 @@ public:
 	Scene() {}
 	virtual ~Scene() {}
 
-	virtual void Update() = 0;
+	virtual void Update(float deltaTime) = 0;
 	virtual void Render(Renderer* renderer) {}
 
 	SceneType GetType() const { return type; }

@@ -43,8 +43,14 @@ void App::Run()
 
 	sceneManager.TransitionTo(SceneType::MainMenu);
 
+	float lastTime = window->GetTime();
+
 	while (!window->ShouldClose())
 	{
+		float currentTime = window->GetTime();
+		float deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+
 		window->PollEvents();
 
 		renderer->StartFrame();
@@ -53,7 +59,7 @@ void App::Run()
 		renderer->Resize(static_cast<float>(window->GetWidth()), static_cast<float>(window->GetHeight()));
 
 		// logic
-		sceneManager.Update();
+		sceneManager.Update(deltaTime);
 		
 		sceneManager.Render(renderer.get());
 		renderer->Render();

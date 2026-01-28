@@ -27,6 +27,8 @@ public:
 	GLFWwindow* GetImpl() { return window; }
 	const GLFWwindow* GetImpl() const { return window; }
 
+	float GetTime() const;
+
 private:
 
 	int width, height;

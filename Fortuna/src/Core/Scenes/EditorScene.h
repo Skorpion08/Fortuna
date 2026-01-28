@@ -16,7 +16,7 @@ public:
 
 	virtual ~EditorScene();
 
-	virtual void Update() override;
+	virtual void Update(float deltaTime) override;
 
 private:
 
