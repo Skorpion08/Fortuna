@@ -39,6 +39,22 @@ RendererOpenGL::RendererOpenGL(float width, float height)
 	program.SetMat4("projection", projection);
 
 	Log::Info("Renderer's OpenGL backend initialized");
+
+	//FT_Library ft;
+	//if (FT_Init_FreeType(&ft))
+	//{
+	//	Log::Error("Failed to init FreeType");
+	//	return;
+	//}
+
+	//FT_Face face;
+	//if (FT_New_Face(ft, "Fonts/Roboto-VariableFont_wdth,wght.ttf", 0, &face))
+	//{
+	//	Log::Error("Failed to load font");
+	//	return;
+	//}
+
+	//FT_Set_Pixel_Sizes(face, 0, 48); // font height
 }
 
 RendererOpenGL::~RendererOpenGL()

@@ -20,7 +20,7 @@ if(MSVC)
 endif()
 
 target_link_libraries(Fortuna PRIVATE glfw glad fmt::fmt glm::glm imgui 
-#Freetype::Freetype
+Freetype::Freetype
 )
 
 # Set compile definitions depending on build type

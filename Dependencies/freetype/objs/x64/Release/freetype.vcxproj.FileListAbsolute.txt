@@ -1,0 +1,1 @@
+C:\Users\konra\source\repos\Fortuna\Dependencies\freetype\objs\x64\Release\freetype.dll

@@ -5,6 +5,9 @@
 #include "../Renderer.h"
 #include "ShaderProgram.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 struct Vertex
 {
 	glm::vec2 pos;

@@ -33,7 +33,7 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(FREETYPE_LIBRARY "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Release/freetype.lib")
 endif()
 
-#find_package(Freetype REQUIRED)
+find_package(Freetype REQUIRED)
 
 add_subdirectory ("Fortuna")
 
