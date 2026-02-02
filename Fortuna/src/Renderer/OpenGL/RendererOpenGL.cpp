@@ -100,6 +100,10 @@ void RendererOpenGL::RenderWheel(int segmentCount, glm::vec2 center, float radiu
 		vertices.push_back({ center + glm::vec2(cos(endAngle), sin(endAngle)) * radius , color});
 	}
 
+	vertices.push_back({ center + glm::vec2(radius - 25.0f, 0.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)});
+	vertices.push_back({ center + glm::vec2(radius, -10.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f) });
+	vertices.push_back({ center + glm::vec2(radius, 10.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f) });
+
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertex) * vertices.size(), vertices.data());
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
