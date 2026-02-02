@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/vec2.hpp>
+#include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
 typedef unsigned int GLuint;
@@ -21,6 +22,8 @@ public:
     void SetFloat(const char* name, float value) const;
 
     void SetVec2(const char* name, glm::vec2 value) const;
+
+    void SetVec4(const char* name, glm::vec4 value) const;
 
     void SetMat4(const char* name, const glm::mat4& value) const;
 

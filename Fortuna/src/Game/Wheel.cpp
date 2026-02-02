@@ -52,7 +52,7 @@ Wheel::Wheel()
 	
 	AddSlot(std::make_unique<PointSlot>(150, color150));
 	AddSlot(std::make_unique<PointSlot>(200, color200));
-	AddSlot(std::make_unique<PointSlot>(200, color200)); // tu nagroda
+	AddSlot(std::make_unique<PointSlot>(100, color100)); // tu nagroda
 
 	AddSlot(std::make_unique<PointSlot>(250, color250));
 	AddSlot(std::make_unique<PointSlot>(500, color500));
@@ -70,7 +70,7 @@ Wheel::Wheel()
 
 void Wheel::Render(Renderer* renderer)
 {
-	renderer->RenderWheel(slots.size(), glm::vec2(0.0f, 0.0f), 350.0f, rotation, colors);
+	renderer->RenderWheel(glm::vec2(0.0f, 0.0f), 350.0f, rotation, slots);
 }
 
 void Wheel::AddSlot(std::unique_ptr<Slot>&& newSlot)

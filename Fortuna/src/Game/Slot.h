@@ -55,7 +55,7 @@ private:
 class BankruptSlot : public Slot
 {
 public:
-	BankruptSlot() : Slot(glm::vec4(0.25f, 0.25f, 0.25f, 1.0f)), title("Bankrupt")
+	BankruptSlot() : Slot(glm::vec4(0.25f, 0.25f, 0.25f, 1.0f)), title("Bankrut")
 	{
 	}
 

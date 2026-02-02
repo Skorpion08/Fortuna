@@ -28,7 +28,7 @@ set(FREETYPE_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/Dependencies/freetype/include")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(FREETYPE_LIBRARY "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Debug/freetype.lib")
 elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    set(FREETYPE_LIBRARY "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Debug/freetype.lib")
+    set(FREETYPE_LIBRARY "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/RelWithDebInfo/freetype.lib")
 elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(FREETYPE_LIBRARY "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Release/freetype.lib")
 endif()
@@ -44,6 +44,7 @@ add_custom_target(copy_fonts ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/Fortuna/Fonts
         ${CMAKE_BINARY_DIR}/Fortuna/Fonts
+    COMMENT "Copying fonts to executable folder"
 )
 
 add_custom_target(copy_shaders ALL
@@ -51,4 +52,21 @@ add_custom_target(copy_shaders ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/Fortuna/Shaders
         ${CMAKE_BINARY_DIR}/Fortuna/Shaders
+    COMMENT "Copying shaders to executable folder"
+)
+
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(FREETYPE_DLL "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Debug/freetype.dll")
+elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    set(FREETYPE_DLL "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/RelWithDebInfo/freetype.dll")
+elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(FREETYPE_DLL "${CMAKE_SOURCE_DIR}/Dependencies/freetype/objs/x64/Release/freetype.dll")
+endif()
+
+add_custom_target(copy_freetypedll ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${FREETYPE_DLL}"
+        "${CMAKE_BINARY_DIR}/Fortuna"
+    COMMENT "Copying freetype.dll to executable folder"
 )
