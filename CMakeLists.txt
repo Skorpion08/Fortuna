@@ -35,6 +35,8 @@ endif()
 
 find_package(Freetype REQUIRED)
 
+add_subdirectory("Dependencies/portable-file-dialogs")
+
 add_subdirectory ("Fortuna")
 
 add_custom_target(copy_fonts ALL

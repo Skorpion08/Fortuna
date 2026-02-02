@@ -8,6 +8,8 @@
 #include <codecvt>
 #include <locale>
 
+#include "portable-file-dialogs.h"
+
 std::u32string toUTF32(const std::string& utf8)
 {
 	std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> conv;
@@ -27,14 +29,23 @@ GameScene::GameScene()
 	Log::Info("Transitioning to game scene...");
 	InitType(SceneType::Game);
 
+	auto result = pfd::open_file(
+		"Open questions file",
+		".",                         // start dir
+		{ "JSON Files (.json)", "*.json" }
+	).result();
+
+	if (result.empty())
+		return; // cancelled
+
 	Log::Info("Loading questions...");
-	std::ifstream questionsFile("questions.json");
+	std::ifstream questionsFile(result[0]);
 	if (!questionsFile.is_open())
 	{
-		Log::Error("Failed to open questions.json");
-		throw std::runtime_error("Failed to open questions.json");
+		Log::Error("Failed to open file: '{}'", result[0]);
+		throw std::runtime_error("Failed to open questions file");
 	}
-	Log::Info("Opened questions.json");
+	Log::Info("Opened '{}'", result[0]);
 
 	nlohmann::json questionsData;
 	try
@@ -50,7 +61,7 @@ GameScene::GameScene()
 	if (!questionsData.is_array())
 	{
 		Log::Error("questions.json is not an array, initializing empty questions");
-		throw std::runtime_error("questions.json is not an array, initializing empty questions");
+		throw std::runtime_error("questions.json is not an array");
 	}
 
 	int corrupted = 0;
@@ -78,6 +89,11 @@ GameScene::GameScene()
 		Log::Warn("Ignored {} corrupted elements", corrupted);
 	}
 
+	if (questions.empty())
+	{
+		Log::Warn("File: '{}' had no questions", result[0]);
+		throw std::runtime_error(fmt::format("File: '{}' had no questions", result[0]));
+	}
 	StartRound(0);
 
 	Log::Info("Transitioned to game scene");

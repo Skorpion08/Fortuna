@@ -7,6 +7,7 @@ add_executable (Fortuna "src/Core/App.h" "src/Core/App.cpp" "src/Core/Log.h" "sr
 
 target_include_directories(Fortuna PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(Fortuna PRIVATE ${CMAKE_SOURCE_DIR}/Dependencies/nlohmann)
+target_include_directories(Fortuna PRIVATE ${CMAKE_SOURCE_DIR}/Dependencies/portable-file-dialogs)
 
 # Set C++20
 set_property(TARGET Fortuna PROPERTY CXX_STANDARD 20)
