@@ -36,7 +36,12 @@ GameScene::GameScene()
 	).result();
 
 	if (result.empty())
-		return; // cancelled
+	{
+		Log::Info("Cancelled, no question file picked");
+
+		SetNextScene(SceneType::MainMenu);
+		return;
+	}
 
 	Log::Info("Loading questions...");
 	std::ifstream questionsFile(result[0]);
